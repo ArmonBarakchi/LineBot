@@ -1,11 +1,6 @@
-/* ************************************************************************************************* */
-// UCSD ECE 5 Lab 4 Code: Line Following Robot with PID 
-// V 3.0
-// Last Modified 11/8/2022 by MingWei Yeoh
-/* ************************************************************************************************* */
 
 /*
-   This is code for your PID controlled line following robot.
+   This is code for  PID controlled line following robot.
    ******      Code Table of Contents      ******
   - Line_Follower_Code_Basic
    > Declare libraries     - declares global variables so each variable can be accessed from every function
@@ -54,7 +49,7 @@ int led_Pins[] = {8};  // LEDs to indicate what part of calibration you're on an
 // ************************************************************************************************* //
 // Change Robot Settings here
 
-#define PRINTALLDATA        1  // Prints ALL the data, Could be useful for debugging =)
+#define PRINTALLDATA        1  // Prints ALL the data, Could be useful for debugging
 #define NOMINALSPEED        30 // This is the base speed for both motors, can also be increased by using potentiometers
 
 // ************************************************************************************************* //
@@ -276,7 +271,7 @@ void CalcError() {
 
   if (MxRead > CriteriaForMax * AveRead) { // Make sure that the highestPResistor is actually "seeing" a line. What happens if there is no line and we take the photoresistor that happens to have the highest value?
 
-    // Next we assign variables to hold the index of the left and right Photoresistor that has the highest value, though we have to make sure that we aren't checking a Photoresistor that doesn't exist.
+    // assign variables to hold the index of the left and right Photoresistor that has the highest value, though we have to make sure that we aren't checking a Photoresistor that doesn't exist.
     // Ex: To the left of the left most photoresistor or the right of the right most photoresistor
     if (highestPResistor != 0)
       leftHighestPR = highestPResistor - 1;
@@ -288,7 +283,7 @@ void CalcError() {
     else
       rightHighestPR = highestPResistor;
 
-    // Next we take the percentage of "line" each of our left, middle, and right photoresistors sees and then we take the average, which is our error calculation
+    //take the percentage of "line" each of our left, middle, and right photoresistors sees and then we take the average, which is our error calculation
     float numerator = (float)(LDR[leftHighestPR] * leftHighestPR) + (float)(LDR[highestPResistor] * highestPResistor) + (float)(LDR[rightHighestPR] * rightHighestPR);
     float denominator = (float)LDR[leftHighestPR] + (float)LDR[highestPResistor] + (float)LDR[rightHighestPR];
 
@@ -302,7 +297,7 @@ void CalcError() {
 // ************************************************************************************************* //
 // PID Function
 void PID_Turn() {
-  kP = (float)kPRead * 1.;    // each of these scaling factors can change depending on how influential you want them to be
+  kP = (float)kPRead * 1.;    
   kI = (float)kIRead * 0.001;
   kD = (float)kDRead * 0.01;
 
@@ -348,6 +343,6 @@ void Print() {
 
   Serial.println("  LMotor:  " + String(M1SpeedtoMotor) + "  RMotor:  " + String(M2SpeedtoMotor));    // This prints the arduino output to each motor so you can see what the values are (0-255)
 
-  delay(100);                                    // just here to slow down the output for easier reading. Don't comment out or else it'll slow down the processor on the arduino
+  delay(100);                                    // just here to slow down the output for easier reading
 
 } // end Print()
